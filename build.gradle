@@ -72,7 +72,7 @@ repositories {
 		}
 		metadataSources { artifact() }
 	}
-	aven {
+	maven {
         name = "Azure Kotori316"
         // See https://dev.azure.com/Kotori316/minecraft/_artifacts/feed/mods for versions
         url = uri("https://pkgs.dev.azure.com/Kotori316/minecraft/_packaging/mods/maven/v1")
