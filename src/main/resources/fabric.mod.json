@@ -22,7 +22,25 @@
         "adapter": "scala",
         "value": "turniplabs.examplemod.ExampleMod"
       }
-    ]
+		],
+		"beforeGameStart": [
+			{
+				"adapter": "scala",
+				"value": "turniplabs.examplemod.ExampleMod"
+			}
+		],
+		"afterGameStart": [
+			{
+				"adapter": "scala",
+				"value": "turniplabs.examplemod.ExampleMod"
+			}
+		],
+		"recipesReady": [
+			{
+				"adapter": "scala",
+				"value": "turniplabs.examplemod.ExampleMod"
+			}
+		]
   },
   "mixins": [
     "examplemod.mixins.json"
