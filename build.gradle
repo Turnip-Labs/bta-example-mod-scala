@@ -1,6 +1,6 @@
 plugins {
 	id 'babric-loom' version '1.1.+'
-	id 'scala'
+	id 'java'
 }
 
 group = project.mod_group
@@ -15,7 +15,7 @@ loom {
 
 repositories {
 	mavenCentral()
-	maven { url 'https://jitpack.io' }
+	maven { url = "https://jitpack.io" }
 	maven {
 		name = 'Babric'
 		url = 'https://maven.glass-launcher.net/babric'
@@ -28,14 +28,6 @@ repositories {
 		url = "https://github.com/Better-than-Adventure"
 		patternLayout {
 			artifact "[organisation]/releases/download/v[revision]/[module].jar"
-			m2compatible = true
-		}
-		metadataSources { artifact() }
-	}
-	ivy {
-		url = "https://github.com/Turnip-Labs"
-		patternLayout {
-			artifact "[organisation]/releases/download/[revision]/[module]-bta-[revision].jar"
 			m2compatible = true
 		}
 		metadataSources { artifact() }
@@ -57,6 +49,14 @@ repositories {
 		metadataSources { artifact() }
 	}
 	ivy {
+		url = "https://github.com/Turnip-Labs"
+		patternLayout {
+			artifact "[organisation]/releases/download/[revision]/[module]-bta-[revision].jar"
+			m2compatible = true
+		}
+		metadataSources { artifact() }
+	}
+	ivy {
 		url = "https://piston-data.mojang.com"
 		patternLayout {
 			artifact "v1/[organisation]/[revision]/[module].jar"
@@ -72,11 +72,6 @@ repositories {
 		}
 		metadataSources { artifact() }
 	}
-	maven {
-        name = "Azure Kotori316"
-        // See https://dev.azure.com/Kotori316/minecraft/_artifacts/feed/mods for versions
-        url = "https://pkgs.dev.azure.com/Kotori316/minecraft/_packaging/mods/maven/v1"
-    }
 }
 
 dependencies {
@@ -90,25 +85,17 @@ dependencies {
 	// If you do not need Halplibe you can comment this line out or delete this line
 	modImplementation "com.github.Turnip-Labs:bta-halplibe:${project.halplibe_version}"
 
-	modImplementation "com.github.Turnip-Labs:ModMenu:2.0.2"
+	modImplementation "ModMenu:ModMenu:2.0.3"
 
 	implementation "org.slf4j:slf4j-api:1.8.0-beta4"
 	implementation "org.apache.logging.log4j:log4j-slf4j18-impl:2.16.0"
 
 	implementation 'com.google.guava:guava:30.0-jre'
-	implementation group: 'com.google.code.gson', name: 'gson', version: '2.8.9'
-
+	implementation group: 'com.google.code.gson', name: 'gson', version: '2.10.1'
 	var log4jVersion = "2.20.0"
 	implementation("org.apache.logging.log4j:log4j-core:${log4jVersion}")
 	implementation("org.apache.logging.log4j:log4j-api:${log4jVersion}")
 	implementation("org.apache.logging.log4j:log4j-1.2-api:${log4jVersion}")
-	include(implementation("org.apache.commons:commons-lang3:3.12.0"))
-
-	modImplementation("com.kotori316:scalable-cats-force-fabric:${project.scf_version}")
-
-	implementation(group: 'org.scala-lang', name: 'scala3-library_3', version: project.scala_version)
-    implementation(group: "org.typelevel", name: "cats-core_3", version: project.cats_version)
-    implementation(group: "org.typelevel", name: "cats-kernel_3", version: project.cats_version)
 }
 
 java {
@@ -117,7 +104,7 @@ java {
 	withSourcesJar()
 }
 
-tasks.withType(JavaCompile).configureEach {
+tasks.withType(JavaCompile) {
 	options.release.set 8
 }
 
