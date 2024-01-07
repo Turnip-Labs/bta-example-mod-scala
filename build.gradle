@@ -1,6 +1,6 @@
 plugins {
 	id 'babric-loom' version '1.1.+'
-	id 'java'
+	id 'scala'
 }
 
 group = project.mod_group
@@ -72,6 +72,11 @@ repositories {
 		}
 		metadataSources { artifact() }
 	}
+	maven {
+		name = "Azure Kotori316"
+		// See https://dev.azure.com/Kotori316/minecraft/_artifacts/feed/mods for versions
+		url = "https://pkgs.dev.azure.com/Kotori316/minecraft/_packaging/mods/maven/v1"
+	}
 }
 
 dependencies {
@@ -96,6 +101,13 @@ dependencies {
 	implementation("org.apache.logging.log4j:log4j-core:${log4jVersion}")
 	implementation("org.apache.logging.log4j:log4j-api:${log4jVersion}")
 	implementation("org.apache.logging.log4j:log4j-1.2-api:${log4jVersion}")
+	include(implementation("org.apache.commons:commons-lang3:3.12.0"))
+
+	modImplementation("com.kotori316:scalable-cats-force-fabric:${project.scf_version}")
+
+	implementation(group: 'org.scala-lang', name: 'scala3-library_3', version: project.scala_version)
+	implementation(group: "org.typelevel", name: "cats-core_3", version: project.cats_version)
+	implementation(group: "org.typelevel", name: "cats-kernel_3", version: project.cats_version)
 }
 
 java {
@@ -104,7 +116,7 @@ java {
 	withSourcesJar()
 }
 
-tasks.withType(JavaCompile) {
+tasks.withType(JavaCompile).configureEach {
 	options.release.set 8
 }
 
